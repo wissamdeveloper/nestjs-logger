@@ -15,6 +15,6 @@ export class AppController {
   @CustomLogger()
   getHello(): string {
     this.logger.info('executing the getHello from AppController');
-    return this.appService.getHello();
+    return this.appService.getHelloo();
   }
 }

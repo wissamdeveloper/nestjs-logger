@@ -1,6 +1,22 @@
 // custom-logger.decorator.ts
 
-import { Logger } from '@nestjs/common';
+import winston from 'winston';
+
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize({ all: true }),
+        winston.format.timestamp({
+          format: 'YYYY-MM-DD HH:mm',
+        }),
+        winston.format.printf(({ level, message, timestamp }) => {
+          return `${timestamp} ${level}: ${message} `;
+        }),
+      ),
+    }),
+  ],
+});
 
 const CONTEXT_METADATA_KEY = '__custom_logger_context__';
 
@@ -17,7 +33,7 @@ export function CustomLogger() {
 
     descriptor.value = function (...args: any[]) {
       const functionName = propertyKey;
-      Logger.warn(`[${context}] [${functionName}] Function called.`);
+      logger.warn(`[${context}] [${functionName}] Function called.`);
       return originalMethod.apply(this, args);
     };
 
