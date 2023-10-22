@@ -1,14 +1,16 @@
-# NestJS Logger
+# Custom Logger Middleware, Decorators, and Custom Winston Setup for Nest.js
 
-A custom logger for your NestJS application using Winston.
+This repository contains a custom logger middleware, decorators, and a sample Nest.js application demonstrating their usage. The middleware is designed to enhance the logging capabilities of your Nest.js application by providing execution time display and additional information like HTTP method, URL, and response status code. It leverages Nest.js decorators and middleware, along with a custom Winston logger setup.
 
-## Introduction
+## Custom Logger Decorator
 
-This project provides a custom logger for NestJS applications. It is built on top of [Winston](https://github.com/winstonjs/winston), a versatile logging library for Node.js. The logger is designed to help you easily log information, errors, class name, function name and execution times for different parts of your NestJS application in a clean look.
+### `custom-logger.decorator.ts`
 
-## Custom Logger
+The `custom-logger.decorator.ts` file defines a custom logger decorator that can be used to log function calls and their context. It is integrated with the Winston logger for enhanced log formatting.
 
-In your NestJS application, you can use the `@CustomLogger()` decorator to add logging capabilities to your functions. It will log when a function is called, along with the context and function name.
+#### How to Use
+
+To use the `CustomLogger` decorator, simply apply it to your functions or methods like this:
 
 ```typescript
 import { CustomLogger } from './logger/custom-logger.decorator';
@@ -22,43 +24,49 @@ export class AppController {
   }
 }
 
+```
+### `ExecutionTimeMiddleware`
 
-## Middleware
-The project includes a middleware (ExecutionTimeMiddleware) that logs the execution time of incoming requests. This can be useful for monitoring and performance analysis.
+The repository also includes an `ExecutionTimeMiddleware` class that can be used as a Nest.js middleware to log request execution times.
 
+#### How to Use
 
-import { ExecutionTimeMiddleware } from './middleware/execution-time.middleware';
+To use the `ExecutionTimeMiddleware`, you can add it to your Nest.js application:
+
+```typescript
+import { ExecutionTimeMiddleware } from './execution-time.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(ExecutionTimeMiddleware);
-  // Your code here
+  await app.listen(3000);
 }
+```
+## Installation and Setup
+Clone this repository:
 
-Usage
-Install the required packages:
+```bash
+git clone https://github.com/yourusername/your-repo.git
+```
 
-npm install winston nest-winston @types/winston
+Install the required dependencies:
 
-Create your logger using the provided decorators and middleware. See the examples in the code.
-
-Customize the logger and log formats as per your requirements.
-
-Run your NestJS application.
-
-Installation
-Clone the repository:
-
-git clone https://github.com/wissamdeveloper/nestjs-logger
-
-Install the project dependencies:
-
+```bash
+cd nestjs_logger
+```
+```bash
 npm install
+```
+Start the Nest.js application:
 
-Configure the logger and middleware as needed for your application.
-Run your NestJS application:
+```bash
+npm run start
+```
 
-npm start
+The application will be accessible at http://localhost:3000.
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Contributing
+If you find any issues or want to contribute to this project, please feel free to create a pull request or open an issue on GitHub.
+
+## License
+This project is licensed under the MIT License.
