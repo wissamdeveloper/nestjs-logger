@@ -15,8 +15,7 @@ export class ExecutionTimeMiddleware implements NestMiddleware {
       const duration = new Date().getTime() - start;
       const logMessage = `Request: ${req.method} ${req.url} - Status Code: ${res.statusCode} - ${duration}ms`;
 
-      // You can replace this with your preferred logging mechanism (e.g., Winston)
-      this.logger.info(logMessage);
+      this.logger.warn(logMessage);
     });
 
     next();
