@@ -65,8 +65,11 @@ npm run start
 
 The application will be accessible at http://localhost:3000.
 
+
 ## Contributing
 If you find any issues or want to contribute to this project, please feel free to create a pull request or open an issue on GitHub.
+
+**If you find this project useful, please consider giving it a star (⭐) on GitHub. Your support is greatly appreciated!**
 
 ## License
 This project is licensed under the MIT License.
